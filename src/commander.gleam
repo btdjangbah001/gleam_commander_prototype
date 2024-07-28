@@ -30,7 +30,11 @@ pub fn main() {
   let res = load(args, options)
   io.debug(res)
   //dict.from_list([#("cache", #("", F)), #("port", #("some master", A)), #("replicaof", #("9001", A))])
-  io.debug(get(res, "port"))
+  io.debug(get(res, "port")) // Ok(#("some master", A))
+  io.debug(get(res, "replicaof")) // Ok(#("9001", A))
+  io.debug(get(res, "cache")) // Ok(#("", F))
+
+  // i didn't want to create different methods for getting a flag and an arg so i added type info to what get returned, whether arg or flag so that the user can decide what to do themselved
 }
 
 fn get(args: Args, name: String) -> Result(#(String, ArgType), Nil) {
